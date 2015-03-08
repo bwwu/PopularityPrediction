@@ -1,0 +1,6 @@
+hashtag -- Average Follower count
+gohawks -- 2393.58231279
+nfl -- 4763.3264987
+superbowl -- 9958.11574868
+gopatriots -- 1602.00987344
+sb49 -- 10230.0452808
