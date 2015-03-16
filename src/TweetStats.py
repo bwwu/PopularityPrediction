@@ -10,7 +10,14 @@ class TweetStats:
 		#filename = '../data/head.txt'
 		self.parser = TweetParser(filename)
 		self.tweetcount = 0
-		self.frequency = list()
+		#### Features ####
+		self.frequency = list()		#Num of tweets per hour
+		self.retweets = list()		#Total # of retweets per hour
+		self.sumfollowers = list()	#Sum of followers per hour
+		self.maxfollowers = list()	#Maximum # followers for a given tweeter
+		self.time = list()
+		self.timeofDay = list()
+
 		self.followers = 0
 		self.parser.load()
 		self.parser.nextTweet()
@@ -18,10 +25,14 @@ class TweetStats:
 
 	def recordTime(self):
 		time = self.parser.getTime()
-		#print time
+		startHour = self.parser.getHour()
+
 		index = (time - self.startTime) / 3600
 		while index >= len(self.frequency):
 			self.frequency.append(0)
+			self.retweets.append(0)
+			self.sumfollowers.append(0)
+			self.maxfollowers.append(0)
 
 		self.frequency[index] += 1
 
@@ -50,3 +61,5 @@ class TweetStats:
 			outfile.write(line)
 			i += 1
 		outfile.close()
+
+	def featureExtract(self)

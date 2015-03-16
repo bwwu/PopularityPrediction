@@ -53,6 +53,13 @@ class TweetParser:
 	def getFollowerCount(self):
 		return self.tweet['tweet']['user']['followers_count']
 
+	def getRetweetCount(self):
+		return self.tweet['metrics']['citations']['data'][0]['citations']
+	
+	def getHour(self):
+		tm = self.getTime()
+		tt = time.localtime(tm)
+		return tt.tm_hour
 
 	def getHashtags(self):			# Return a list of hashtags 
 		return self.hashtags
