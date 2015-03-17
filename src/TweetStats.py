@@ -1,16 +1,10 @@
 import datetime, time
 from TweetParser import *
-<<<<<<< HEAD
 import Features
 
 datapath = '../data/'
 outpath = '../result/'
 output = 'features.csv'
-=======
-
-datapath = '../data/'
-outpath = '../result/'
->>>>>>> 4a41dd6f633efe459bfeb473b6fa71d6fde8ef99
 
 class TweetStats:
 	def __init__(self,hashtag):
@@ -20,14 +14,11 @@ class TweetStats:
 		self.tweetcount = 0
 		#### Features ####
 		self.frequency = list()		#Num of tweets per hour
-<<<<<<< HEAD
-=======
 		self.retweets = list()		#Total # of retweets per hour
 		self.sumfollowers = list()	#Sum of followers per hour
 		self.maxfollowers = list()	#Maximum # followers for a given tweeter
 		self.time = list()
 		self.timeofDay = list()
->>>>>>> 4a41dd6f633efe459bfeb473b6fa71d6fde8ef99
 
 		self.followers = 0
 		self.parser.load()
@@ -41,12 +32,6 @@ class TweetStats:
 		index = (time - self.startTime) / 3600
 		while index >= len(self.frequency):
 			self.frequency.append(0)
-<<<<<<< HEAD
-=======
-			self.retweets.append(0)
-			self.sumfollowers.append(0)
-			self.maxfollowers.append(0)
->>>>>>> 4a41dd6f633efe459bfeb473b6fa71d6fde8ef99
 
 		self.frequency[index] += 1
 
@@ -76,7 +61,6 @@ class TweetStats:
 			i += 1
 		outfile.close()
 
-<<<<<<< HEAD
 	def genVector(self):
 		self.vector = [Features.NumberOfTweets(),Features.NumberOfRetweets(),Features.NumberOfFollowers(),Features.MaxFollowers(),Features.Time()]
 
@@ -99,6 +83,4 @@ class TweetStats:
 				break
 		outfile.close()	
 		self.parser.close()
-=======
-	def featureExtract(self)
->>>>>>> 4a41dd6f633efe459bfeb473b6fa71d6fde8ef99
+
