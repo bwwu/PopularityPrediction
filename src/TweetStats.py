@@ -8,7 +8,7 @@ output = 'features.csv'
 
 class TweetStats:
 	def __init__(self,hashtag):
-		filename = datapath + 'split_tweets_#' + hashtag + '.txt'
+		filename = datapath + 'tweets_#' + hashtag + '.txt'
 		#filename = '../data/head.txt'
 		self.parser = TweetParser(filename)
 		self.tweetcount = 0
@@ -66,12 +66,11 @@ class TweetStats:
 		self.vector = [Feature.NumberOfTweets().compute(self.parser.getTweet()),Feature.NumberOfRetweets().compute(self.parser.getTweet()),Feature.NumberOfFollowers().compute(self.parser.getTweet()),Feature.MaxFollowers().compute(self.parser.getTweet()),Feature.Time().compute(self.parser.getTweet())]
 
 	def genFeatures(self):
-		count = 0
 		outfile = open(outpath + output, 'w')
 		values = list()
 		index = 0
 		while(True):
-			self.genVector()
+			#self.genVector()
 			time = self.parser.getTime()
 			temp = index
 			index = (time - self.startTime) / 3600
@@ -81,9 +80,14 @@ class TweetStats:
 
 			try:
 			    temp = values[index]
+
 			    values[index] = self.vector
 			except IndexError:
-			    values.append(self.vector)
+				self.genVector()
+				while index >= len(values):
+					self.values.append(0)
+
+				values[index] = self.vector
 
 			if self.parser.nextTweet() is not 0:
 				break
