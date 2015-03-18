@@ -1,6 +1,6 @@
 import datetime, time
 from TweetParser import *
-import Features
+import Feature
 
 datapath = '../data/'
 outpath = '../result/'
@@ -8,7 +8,7 @@ output = 'features.csv'
 
 class TweetStats:
 	def __init__(self,hashtag):
-		filename = datapath + 'tweets_#' + hashtag + '.txt'
+		filename = datapath + 'split_tweets_#' + hashtag + '.txt'
 		#filename = '../data/head.txt'
 		self.parser = TweetParser(filename)
 		self.tweetcount = 0
@@ -24,6 +24,7 @@ class TweetStats:
 		self.parser.load()
 		self.parser.nextTweet()
 		self.startTime = self.parser.getTime()
+		self.vector = list()
 
 	def recordTime(self):
 		time = self.parser.getTime()
@@ -62,25 +63,36 @@ class TweetStats:
 		outfile.close()
 
 	def genVector(self):
-		self.vector = [Features.NumberOfTweets(),Features.NumberOfRetweets(),Features.NumberOfFollowers(),Features.MaxFollowers(),Features.Time()]
+		self.vector = [Feature.NumberOfTweets().compute(self.parser.getTweet()),Feature.NumberOfRetweets().compute(self.parser.getTweet()),Feature.NumberOfFollowers().compute(self.parser.getTweet()),Feature.MaxFollowers().compute(self.parser.getTweet()),Feature.Time().compute(self.parser.getTweet())]
 
 	def genFeatures(self):
 		count = 0
 		outfile = open(outpath + output, 'w')
-		self.genVector()
+		values = list()
+		index = 0
 		while(True):
+			self.genVector()
 			time = self.parser.getTime()
-			startHour = self.parser.getHour()
-
+			# temp = index
 			index = (time - self.startTime) / 3600
-			while index >= len(self.frequency):
-				outfile.write(','.join([str(i) for i in self.vector]))
-				self.vector = self.genVector()
-			for feature in self.vector:
-				feature.compute(parser.getTweet())
 
+			# for feature in self.vector:
+			# 	feature.compute(self.parser.getTweet())
+
+			values.insert(index, self.vector)
+			# if(index > temp):
+			# 	values.append(self.vector)
+			# else:
+			# 	values[index] = self.vector
+
+			# while index >= len(self.frequency):
+			# 	outfile.write(','.join([str(index) for index in self.vector]))
+			# 	self.genVector()
 			if self.parser.nextTweet() is not 0:
 				break
+
+		for w in range(0,len(values)-1,1):
+			outfile.write(str(w) + ',' + ','.join(map(str, values[w])) + '\n')
+
 		outfile.close()	
 		self.parser.close()
-
