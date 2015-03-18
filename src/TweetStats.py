@@ -73,10 +73,17 @@ class TweetStats:
 		while(True):
 			self.genVector()
 			time = self.parser.getTime()
-			# temp = index
+			temp = index
 			index = (time - self.startTime) / 3600
+			
+			if(temp > index):
+				print "This should never print out..."
 
-			values.insert(index, self.vector)
+			try:
+			    temp = values[index]
+			    values[index] = self.vector
+			except IndexError:
+			    values.append(self.vector)
 
 			if self.parser.nextTweet() is not 0:
 				break
