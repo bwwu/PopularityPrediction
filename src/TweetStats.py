@@ -76,18 +76,8 @@ class TweetStats:
 			# temp = index
 			index = (time - self.startTime) / 3600
 
-			# for feature in self.vector:
-			# 	feature.compute(self.parser.getTweet())
-
 			values.insert(index, self.vector)
-			# if(index > temp):
-			# 	values.append(self.vector)
-			# else:
-			# 	values[index] = self.vector
 
-			# while index >= len(self.frequency):
-			# 	outfile.write(','.join([str(index) for index in self.vector]))
-			# 	self.genVector()
 			if self.parser.nextTweet() is not 0:
 				break
 
