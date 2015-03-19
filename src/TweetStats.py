@@ -84,17 +84,17 @@ class TweetStats:
 
 		outfile.write(','.join(features)+'\n')
 
-		count = 0
+		self.count = 0
 		self.genVector()
 		while(True):
 			time = self.parser.getTime()
 			index = (time - startTime) / 3600
 			
 
-			while index >= count:
-				outfile.write(','.join(map(str,[count] + [a.get() for a in self.vector]))+'\n')
+			while index >= self.count:
+				outfile.write(','.join(map(str,[self.count] + [a.get() for a in self.vector]))+'\n')
 				self.genVector()
-				count += 1
+				self.count += 1
 			
 			for f in self.vector:
 				f.compute(self.parser.getTweet())
