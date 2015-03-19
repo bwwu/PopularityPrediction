@@ -8,10 +8,5 @@ for tag in hashtag_list:
 	tp.compute()
 	line = tag + ' -- ' + str(tp.averageFollowerCount())
 	print line
-	tp.writeTweetFrequency(tag + '.csv')
-
-	# part 2
-	tp = TweetStats(tag)
-	tp.genFeatures()
-	print 'Feature extraction done.'
+	tp.writeTweetFrequency('pt1_' + tag + '.csv')
 

@@ -9,7 +9,7 @@ outpath = '../result/'
 startTime = 1419804000
 
 
-features = [ 'NumberOfTweets', 'NumberOfRetweets', 
+features = [ 'Index', 'NumberOfTweets', 'NumberOfRetweets', 
 				'NumberOfFollowers', 'MaxFollowers',
 				'Time']
 class TweetStats:
@@ -103,7 +103,7 @@ class TweetStats:
 #
 #				values[index] = self.vector
 			while index >= count:
-				outfile.write(','.join(map(str,[a.get() for a in self.vector]))+'\n')
+				outfile.write(','.join(map(str,[count] + [a.get() for a in self.vector]))+'\n')
 				self.genVector()
 				count += 1
 			
