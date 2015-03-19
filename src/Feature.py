@@ -10,6 +10,9 @@ class Feature:
 	@abstractmethod
 	def compute(self,tweet):
 		pass
+	@abstractmethod
+	def get(self):
+		pass
 
 class NumberOfTweets(Feature):
 	def __init__(self):
@@ -17,6 +20,8 @@ class NumberOfTweets(Feature):
 
 	def compute(self,tweet):
 		self.tweetcount += 1
+		return self.tweetcount
+	def get(self):
 		return self.tweetcount
 
 class NumberOfRetweets(Feature):
@@ -26,6 +31,8 @@ class NumberOfRetweets(Feature):
 	def compute(self,tweet):
 		self.retweet += tweet['metrics']['citations']['data'][0]['citations']
 		return self.retweet
+	def get(self):
+		return self.retweet
 
 class NumberOfFollowers(Feature):
 	def __init__(self):
@@ -33,6 +40,8 @@ class NumberOfFollowers(Feature):
 
 	def compute(self,tweet):
 		self.followers += tweet['tweet']['user']['followers_count']
+		return self.followers
+	def get(self):
 		return self.followers
 
 class MaxFollowers(Feature):
@@ -45,6 +54,16 @@ class MaxFollowers(Feature):
 			self.max = curr
 		return self.max
 
+	def get(self):
+		return self.max
+
 class Time(Feature):
+	def __init__(self):
+		self.hour = 0
 	def compute(self,tweet):
-		return tweet['firstpost_date']
+		temp = tweet['firstpost_date']
+		temp = time.localtime(temp)
+		self.hour = temp.tm_hour
+		
+	def get(self):
+		return self.hour

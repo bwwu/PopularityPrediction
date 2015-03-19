@@ -4,10 +4,19 @@ import Feature
 
 datapath = '../data/'
 outpath = '../result/'
-output = 'features.csv'
+#output = 'features.csv'
 
+startTime = 1419804000
+
+
+features = [ 'NumberOfTweets', 'NumberOfRetweets', 
+				'NumberOfFollowers', 'MaxFollowers',
+				'Time']
 class TweetStats:
 	def __init__(self,hashtag):
+		# hash tag
+		self.hashtag = hashtag
+
 		filename = datapath + 'tweets_#' + hashtag + '.txt'
 		#filename = '../data/head.txt'
 		self.parser = TweetParser(filename)
@@ -63,37 +72,49 @@ class TweetStats:
 		outfile.close()
 
 	def genVector(self):
-		self.vector = [Feature.NumberOfTweets().compute(self.parser.getTweet()),Feature.NumberOfRetweets().compute(self.parser.getTweet()),Feature.NumberOfFollowers().compute(self.parser.getTweet()),Feature.MaxFollowers().compute(self.parser.getTweet()),Feature.Time().compute(self.parser.getTweet())]
+		self.vector = [Feature.NumberOfTweets(),Feature.NumberOfRetweets(),Feature.NumberOfFollowers(),Feature.MaxFollowers(),Feature.Time()]
 
 	def genFeatures(self):
+		output = self.hashtag + '.csv'
 		outfile = open(outpath + output, 'w')
 		values = list()
-		index = 0
+
+		outfile.write(','.join(features)+'\n')
+
+		count = 0
+		self.genVector()
 		while(True):
 			#self.genVector()
 			time = self.parser.getTime()
-			temp = index
-			index = (time - self.startTime) / 3600
+			#temp = index
+			index = (time - startTime) / 3600
 			
-			if(temp > index):
-				print "This should never print out..."
+			#if(temp > index):
+				#print "This should never print out..."
 
-			try:
-			    temp = values[index]
-
-			    values[index] = self.vector
-			except IndexError:
+#			try:
+#			    temp = values[index]
+#
+#			    values[index] = self.vector
+#			except IndexError:
+#				self.genVector()
+#				while index >= len(values):
+#					self.values.append(0)
+#
+#				values[index] = self.vector
+			while index >= count:
+				outfile.write(','.join(map(str,[a.get() for a in self.vector]))+'\n')
 				self.genVector()
-				while index >= len(values):
-					self.values.append(0)
-
-				values[index] = self.vector
+				count += 1
+			
+			for f in self.vector:
+				f.compute(self.parser.getTweet())
 
 			if self.parser.nextTweet() is not 0:
 				break
 
-		for w in range(0,len(values)-1,1):
-			outfile.write(str(w) + ',' + ','.join(map(str, values[w])) + '\n')
+		#for w in range(0,len(values)-1,1):
+			#outfile.write(str(w) + ',' + ','.join(map(str, values[w])) + '\n')
 
 		outfile.close()	
 		self.parser.close()
