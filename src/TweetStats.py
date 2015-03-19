@@ -34,6 +34,7 @@ class TweetStats:
 		self.parser.nextTweet()
 		self.startTime = self.parser.getTime()
 		self.vector = list()
+		self.count = 0	# number of hours
 
 	def recordTime(self):
 		time = self.parser.getTime()
@@ -72,10 +73,12 @@ class TweetStats:
 		outfile.close()
 
 	def genVector(self):
-		self.vector = [Feature.NumberOfTweets(),Feature.NumberOfRetweets(),Feature.NumberOfFollowers(),Feature.MaxFollowers(),Feature.Time()]
+		hour = (self.count + time.localtime(startTime).tm_hour) % 24
+		self.vector = [Feature.NumberOfTweets(),Feature.NumberOfRetweets(),
+		Feature.NumberOfFollowers(),Feature.MaxFollowers(),Feature.Time(hour)]
 
 	def genFeatures(self):
-		output = self.hashtag + '.csv'
+		output = 'pt2_' + self.hashtag + '.csv'
 		outfile = open(outpath + output, 'w')
 		values = list()
 
@@ -84,24 +87,10 @@ class TweetStats:
 		count = 0
 		self.genVector()
 		while(True):
-			#self.genVector()
 			time = self.parser.getTime()
-			#temp = index
 			index = (time - startTime) / 3600
 			
-			#if(temp > index):
-				#print "This should never print out..."
 
-#			try:
-#			    temp = values[index]
-#
-#			    values[index] = self.vector
-#			except IndexError:
-#				self.genVector()
-#				while index >= len(values):
-#					self.values.append(0)
-#
-#				values[index] = self.vector
 			while index >= count:
 				outfile.write(','.join(map(str,[count] + [a.get() for a in self.vector]))+'\n')
 				self.genVector()
@@ -113,8 +102,54 @@ class TweetStats:
 			if self.parser.nextTweet() is not 0:
 				break
 
-		#for w in range(0,len(values)-1,1):
-			#outfile.write(str(w) + ',' + ','.join(map(str, values[w])) + '\n')
+		outfile.close()	
+		self.parser.close()
+
+
+class FeatureGen:
+	def __init__(self, hashtag):
+		filename = datapath + 'tweets_#' + hashtag + '.txt'	# Filename
+		# Member data
+		self.hashtag = hashtag
+		self.parser = TweetParser(filename)
+		self.fvector = None		# Feature vector	[F1, F2, F3, ...]
+		self.output = None
+		
+	# Creates vector of updateable features
+	def vector(self):
+		self.fvector = [Feature.NumberOfTweets(),Feature.NumberOfRetweets(),
+		Feature.NumberOfFollowers(),Feature.MaxFollowers(),Feature.Time(0)]
+
+	# Build feature matrix for all data
+	def generate(self):
+		output = 'feature_' + self.hashtag + '.csv'
+		self.output = output
+
+		outfile = open(outpath + output, 'w')
+		values = list()
+
+		outfile.write(','.join(features)+'\n')
+
+		self.vector()
+
+		self.parser.load()
+		while(self.parser.nextTweet() is not 0):
+
+			time = self.parser.getTime()
+			index = (time - startTime) / 3600
+			
+			# Write out features for current index
+			while index >= count:
+				outfile.write(','.join(map(str,[count] + 
+				[a.get() for a in self.vector]))+'\n')
+				self.vector()
+				self.count += 1
+			
+			for f in self.vector:
+				f.compute(self.parser.getTweet())
 
 		outfile.close()	
 		self.parser.close()
+	
+	def outfile(self):
+		return self.output

@@ -1,7 +1,8 @@
 from TweetStats import *
 import Regression
 
-hashtag_list = ['gohawks', 'nfl', 'superbowl', 'gopatriots', 'sb49']
+hashtag_list = ['gohawks', 'nfl', 'superbowl', 'gopatriots', 
+'patriots','sb49']
 
 features = ['NumberOfRetweets', 'NumberOfFollowers','MaxFollowers','Time']
 predictant = ['NumberOfTweets']

@@ -58,8 +58,8 @@ class MaxFollowers(Feature):
 		return self.max
 
 class Time(Feature):
-	def __init__(self):
-		self.hour = 0
+	def __init__(self,hour):
+		self.hour = hour
 	def compute(self,tweet):
 		temp = tweet['firstpost_date']
 		temp = time.localtime(temp)

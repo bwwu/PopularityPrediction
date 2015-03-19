@@ -6,6 +6,7 @@ datapath = '../result/'
 
 if __name__ == '__main__':
 	dataset = '../data/test.csv'	#Feature set
+
 	df = pandas.read_csv(dataset)
 	model = smf.ols(formula='numTweets ~ totalRetweets + sumFollowers + maxFollowers + timeOfDay', data=df)
 
@@ -15,8 +16,8 @@ features = ['NumberOfRetweets', 'NumberOfFollowers', 'MaxFollowers',
 predictant = ['NumberOfTweets']
 
 class ModelBuilder:
-	def __init__(self, features, predictant):
-		self.formula = '+'.join(predictant) + '~' + '+'.join(features)
+	def __init__(self, features, response):
+		self.formula = '+'.join(response) + '~' + '+'.join(features)
 		self.df = None
 
 	def open(self,csvfile):
