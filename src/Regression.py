@@ -1,25 +1,27 @@
-import sys
 import TweetStats		#for startTime
 import statsmodels.formula.api as smf
 import numpy as np
 import pandas
+from patsy import dmatrices
 
 datapath = '../result/'
 
-if __name__ == '__main__':
-	dataset = '../data/test.csv'	#Feature set
+features = [
+	'NumberOfTweets',
+	'NumberOfRetweets',
+	'NumberOfFollowers', 
+	'MaxFollowers',
+	'Time']
 
-	df = pandas.read_csv(dataset)
-	model = smf.ols(formula='numTweets ~ totalRetweets + sumFollowers + maxFollowers + timeOfDay', data=df)
-
-
-features = ['NumberOfRetweets', 'NumberOfFollowers', 'MaxFollowers',
-				'Time']
 predictant = ['NumberOfTweets']
+response = 'NumberOfTweets'
 
 class ModelBuilder:
 	def __init__(self, features, response):
-		self.formula = '+'.join(response) + '~' + '+'.join(features)
+
+		self.features = features	# Arr of Features to bld model
+		self.resp = response			# Response var (predictant)
+
 		self.df = None
 		self.train_s = None
 		self.test_s = None
@@ -29,7 +31,11 @@ class ModelBuilder:
 		# Fix dataset to include next hour's tweet count
 		
 	def model(self):
-		return smf.ols(formula=self.formula, data=self.df)
+		formula =  response +'~' + '+'.join(self.resp)
+		y,X = dmatrices(formula, data=self.df, return_type="dataframe")
+		y = y.shift(-1)
+		return smf.OLS(y[0:-1],X[0:-1])
+		
 
 	# Make training and testing set based off array of indices
 	def makeTrainingSet(self, idxarr):
@@ -38,7 +44,7 @@ class ModelBuilder:
 		dtest = dict()
 
 		# Select all indices not in the training set for test set
-		test_idx = [i for i in range(len(self.df) if i not in idxarr)]
+		test_idx = [i for i in range(len(self.df)) if i not in idxarr]
 
 		for f in features:
 			arr = self.df[f].values.tolist()	#Change each frame column to list
@@ -59,6 +65,8 @@ class ModelBuilder:
 		
 		df = df[idx_init:idx_final]
 
-
-	#def crossvalidation:
+	def crossvalidation(self):
+		pass
+		#mod = smf.ols(formula=self.formula, data=self.train_s	
+		#res = mod.fit()
 		
