@@ -1,3 +1,5 @@
+import sys
+import TweetStats		#for startTime
 import statsmodels.formula.api as smf
 import numpy as np
 import pandas
@@ -24,7 +26,8 @@ class ModelBuilder:
 
 	def open(self,csvfile):
 		self.df = pandas.read_csv(datapath + csvfile)
-	
+		# Fix dataset to include next hour's tweet count
+		
 	def model(self):
 		return smf.ols(formula=self.formula, data=self.df)
 
@@ -47,4 +50,15 @@ class ModelBuilder:
 
 		self.train_s = DataFrame(dtrain)
 		self.test_s = DataFrame(dtest)
+	
+	# Given a dataframe select rows within specified time frame
+	def prune(self, t_init, t_final):
+		t_start = TweetStats.startTime
+		idx_init = 0 if t_init is 0 else (t_init - t_start)/3600
+		idx_final = len(df) if t_final is 0 else (t_final - t_start)/3600
+		
+		df = df[idx_init:idx_final]
+
+
+	#def crossvalidation:
 		

@@ -23,11 +23,11 @@ class TweetStats:
 		self.tweetcount = 0
 		#### Features ####
 		self.frequency = list()		#Num of tweets per hour
-		self.retweets = list()		#Total # of retweets per hour
-		self.sumfollowers = list()	#Sum of followers per hour
-		self.maxfollowers = list()	#Maximum # followers for a given tweeter
-		self.time = list()
-		self.timeofDay = list()
+#		self.retweets = list()		#Total # of retweets per hour
+#		self.sumfollowers = list()	#Sum of followers per hour
+#		self.maxfollowers = list()	#Maximum # followers for a given tweeter
+#		self.time = list()
+#		self.timeofDay = list()
 
 		self.followers = 0
 		self.parser.load()

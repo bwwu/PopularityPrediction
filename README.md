@@ -9,3 +9,4 @@
 * Add new features for Part 3 in Feature.py
 * Clean up TweetStats.py modules (separate FeatureGen and Part 1 stats)
 * Prune DataFrame based on time window (for Part 4) e.g date < Feb 1st
+* Fix the feature building (Tweet count should be for next hour)
