@@ -17,8 +17,8 @@ response = 'NumberOfTweets'
 m = Regression.ModelBuilder(features, predictant)
 
 for tag in hashtag_list:
-#	tp = TweetStats(tag)
-#	tp.genFeatures()
+	#tp = TweetStats(tag)
+	#tp.genFeatures()
 	print 'Feature extraction done for' + tag + '.........'
 	filename = 'pt2_' + tag + '.csv'
 	m.open(filename)

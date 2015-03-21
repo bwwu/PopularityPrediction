@@ -31,6 +31,7 @@ class ModelBuilder:
 		# Fix dataset to include next hour's tweet count
 		
 	def model(self):
+		#TODO: replace response with member var
 		formula =  response +'~' + '+'.join(self.resp)
 		y,X = dmatrices(formula, data=self.df, return_type="dataframe")
 		y = y.shift(-1)
@@ -54,8 +55,8 @@ class ModelBuilder:
 			dtrain.update({f : a_train})
 			dtest.update({f : a_test})
 
-		self.train_s = DataFrame(dtrain)
-		self.test_s = DataFrame(dtest)
+		self.train_s = pandas.DataFrame(dtrain)
+		self.test_s = pandas.DataFrame(dtest)
 	
 	# Given a dataframe select rows within specified time frame
 	def prune(self, t_init, t_final):
@@ -63,10 +64,33 @@ class ModelBuilder:
 		idx_init = 0 if t_init is 0 else (t_init - t_start)/3600
 		idx_final = len(df) if t_final is 0 else (t_final - t_start)/3600
 		
-		df = df[idx_init:idx_final]
+		df = self.df.shift(-idx_init)
+		self.df = df[0:idx_final-idx_init]
 
+	#
 	def crossvalidation(self):
-		pass
-		#mod = smf.ols(formula=self.formula, data=self.train_s	
-		#res = mod.fit()
-		
+		print 'Cross validation....'
+		formula =  response +'~' + '+'.join(self.resp)
+		y,X = dmatrices(formula, data=self.df, return_type="dataframe")
+		mod = smf.OLS(y,X)
+		res = mod.fit()
+
+		resid = 0			# Sum of |y_exp - y_pred|
+		df = self.test_s	# Testing set
+
+		#TODO: replace response with member data
+		for i in range(len(df)-1):		# For each data point in testing set
+			exog = df.loc[i].to_dict()	# Vector of features
+			ypred = res.predict(exog)	# Prediction
+			ypred = ypred[0]
+			yexp = df[response].loc[i+1]
+			resid += abs(ypred - yexp)	
+
+		avg_e =  resid*1.0/(len(df)-1)	# Avg prediction error
+		return avg_e
+
+
+	def length(self):
+		if self.df is None:
+			return -1
+		return len(self.df)

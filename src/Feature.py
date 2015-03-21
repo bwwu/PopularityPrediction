@@ -25,7 +25,8 @@ class NumberOfTweets(Feature): # returns current tweet count
 		return self.tweetcount
 
 class NumberOfRetweets(Feature): # returns current retweet count
-		#self.retweet = 0
+	def __init__(self):
+		self.retweet = 0
 	def compute(self,tweet):
 		self.retweet += tweet['metrics']['citations']['data'][0]['citations'] 
 		return self.retweet
