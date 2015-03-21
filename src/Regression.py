@@ -33,7 +33,7 @@ class ModelBuilder:
 		
 	def model(self):
 		#TODO: replace response with member var
-		formula =  response +'~' + '+'.join(self.resp)
+		formula =  response +'~' + '+'.join(self.features)
 		y,X = dmatrices(formula, data=self.df, return_type="dataframe")
 		y = y.shift(-1)
 		return smf.OLS(y[0:-1],X[0:-1])
@@ -107,3 +107,6 @@ class ModelBuilder:
 		if self.df is None:
 			return -1
 		return len(self.df)
+
+	def dataframe(self):
+		return self.df
