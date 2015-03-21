@@ -1,0 +1,210 @@
+Feature extraction done forgohawks.........
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:         NumberOfTweets   R-squared:                       0.888
+Model:                            OLS   Adj. R-squared:                  0.886
+Method:                 Least Squares   F-statistic:                     436.9
+Date:                Fri, 20 Mar 2015   Prob (F-statistic):          6.00e-204
+Time:                        19:35:59   Log-Likelihood:                -1727.2
+No. Observations:                 449   AIC:                             3472.
+Df Residuals:                     440   BIC:                             3509.
+Df Model:                           8                                         
+Covariance Type:            nonrobust                                         
+=====================================================================================
+                        coef    std err          t      P>|t|      [95.0% Conf. Int.]
+-------------------------------------------------------------------------------------
+Intercept             0.6865      0.631      1.088      0.277        -0.554     1.927
+NumberOfTweets        0.1741      0.240      0.725      0.469        -0.298     0.646
+URLRatio              4.0044      2.873      1.394      0.164        -1.643     9.652
+FriendCount           0.0001      0.000      0.533      0.594        -0.000     0.001
+AuthorCount           0.9508      0.295      3.226      0.001         0.372     1.530
+MeanOfRetweets        0.4662      1.698      0.275      0.784        -2.871     3.803
+NumberOfRetweets     -1.4060      0.518     -2.712      0.007        -2.425    -0.387
+NumberOfFollowers  5.219e-06   2.88e-06      1.814      0.070     -4.36e-07  1.09e-05
+MaxFollowers      -4.509e-06   4.06e-06     -1.111      0.267     -1.25e-05  3.46e-06
+==============================================================================
+Omnibus:                      245.646   Durbin-Watson:                   2.046
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             9060.936
+Skew:                           1.690   Prob(JB):                         0.00
+Kurtosis:                      24.746   Cond. No.                     2.87e+06
+==============================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 2.87e+06. This might indicate that there are
+strong multicollinearity or other numerical problems.
+Feature extraction done fornfl.........
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:         NumberOfTweets   R-squared:                       0.834
+Model:                            OLS   Adj. R-squared:                  0.831
+Method:                 Least Squares   F-statistic:                     262.8
+Date:                Fri, 20 Mar 2015   Prob (F-statistic):          4.57e-158
+Time:                        19:36:00   Log-Likelihood:                -1849.2
+No. Observations:                 428   AIC:                             3716.
+Df Residuals:                     419   BIC:                             3753.
+Df Model:                           8                                         
+Covariance Type:            nonrobust                                         
+=====================================================================================
+                        coef    std err          t      P>|t|      [95.0% Conf. Int.]
+-------------------------------------------------------------------------------------
+Intercept             0.4349      0.955      0.456      0.649        -1.442     2.312
+NumberOfTweets        1.6397      0.235      6.974      0.000         1.178     2.102
+URLRatio             24.0080      4.314      5.565      0.000        15.528    32.488
+FriendCount          -0.0006      0.000     -1.579      0.115        -0.001     0.000
+AuthorCount          -1.3345      0.307     -4.343      0.000        -1.938    -0.730
+MeanOfRetweets       -9.5355      3.323     -2.869      0.004       -16.068    -3.003
+NumberOfRetweets      6.2177      2.067      3.008      0.003         2.154    10.281
+NumberOfFollowers  5.016e-05   1.05e-05      4.793      0.000      2.96e-05  7.07e-05
+MaxFollowers       -7.88e-05   1.31e-05     -6.003      0.000        -0.000  -5.3e-05
+==============================================================================
+Omnibus:                      213.745   Durbin-Watson:                   2.363
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):            32523.354
+Skew:                           1.018   Prob(JB):                         0.00
+Kurtosis:                      45.657   Cond. No.                     1.66e+06
+==============================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 1.66e+06. This might indicate that there are
+strong multicollinearity or other numerical problems.
+Feature extraction done forsuperbowl.........
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:         NumberOfTweets   R-squared:                       0.911
+Model:                            OLS   Adj. R-squared:                  0.909
+Method:                 Least Squares   F-statistic:                     627.4
+Date:                Fri, 20 Mar 2015   Prob (F-statistic):          1.44e-252
+Time:                        19:36:01   Log-Likelihood:                -1724.8
+No. Observations:                 501   AIC:                             3468.
+Df Residuals:                     492   BIC:                             3506.
+Df Model:                           8                                         
+Covariance Type:            nonrobust                                         
+=====================================================================================
+                        coef    std err          t      P>|t|      [95.0% Conf. Int.]
+-------------------------------------------------------------------------------------
+Intercept             0.2709      0.387      0.700      0.484        -0.490     1.032
+NumberOfTweets       -0.0644      0.146     -0.440      0.660        -0.352     0.223
+URLRatio              2.4386      1.598      1.526      0.128        -0.701     5.578
+FriendCount        1.501e-05   5.59e-05      0.269      0.788     -9.48e-05     0.000
+AuthorCount           1.2083      0.153      7.872      0.000         0.907     1.510
+MeanOfRetweets       -3.4346      2.316     -1.483      0.139        -7.985     1.116
+NumberOfRetweets      0.9770      0.354      2.763      0.006         0.282     1.672
+NumberOfFollowers -1.473e-05   3.81e-06     -3.864      0.000     -2.22e-05 -7.24e-06
+MaxFollowers       8.855e-06   4.48e-06      1.979      0.048      6.17e-08  1.76e-05
+==============================================================================
+Omnibus:                      336.031   Durbin-Watson:                   1.590
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):            17391.676
+Skew:                           2.242   Prob(JB):                         0.00
+Kurtosis:                      31.514   Cond. No.                     3.18e+06
+==============================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 3.18e+06. This might indicate that there are
+strong multicollinearity or other numerical problems.
+Feature extraction done forgopatriots.........
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:         NumberOfTweets   R-squared:                       0.738
+Model:                            OLS   Adj. R-squared:                  0.735
+Method:                 Least Squares   F-statistic:                     215.0
+Date:                Fri, 20 Mar 2015   Prob (F-statistic):          8.11e-172
+Time:                        19:36:02   Log-Likelihood:                -2996.8
+No. Observations:                 618   AIC:                             6012.
+Df Residuals:                     609   BIC:                             6051.
+Df Model:                           8                                         
+Covariance Type:            nonrobust                                         
+=====================================================================================
+                        coef    std err          t      P>|t|      [95.0% Conf. Int.]
+-------------------------------------------------------------------------------------
+Intercept            -1.1559      1.344     -0.860      0.390        -3.795     1.483
+NumberOfTweets       -1.4624      0.256     -5.715      0.000        -1.965    -0.960
+URLRatio            -12.3928      7.996     -1.550      0.122       -28.095     3.309
+FriendCount       -4.034e-05      0.000     -0.113      0.910        -0.001     0.001
+AuthorCount           6.1196      0.358     17.112      0.000         5.417     6.822
+MeanOfRetweets       20.9893     13.136      1.598      0.111        -4.808    46.786
+NumberOfRetweets    -17.2083      1.780     -9.667      0.000       -20.704   -13.712
+NumberOfFollowers    -0.0025      0.000    -16.213      0.000        -0.003    -0.002
+MaxFollowers          0.0025      0.000     16.238      0.000         0.002     0.003
+==============================================================================
+Omnibus:                      890.678   Durbin-Watson:                   1.676
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):           337032.569
+Skew:                           7.537   Prob(JB):                         0.00
+Kurtosis:                     116.408   Cond. No.                     2.33e+06
+==============================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 2.33e+06. This might indicate that there are
+strong multicollinearity or other numerical problems.
+Feature extraction done forpatriots.........
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:         NumberOfTweets   R-squared:                       0.890
+Model:                            OLS   Adj. R-squared:                  0.887
+Method:                 Least Squares   F-statistic:                     442.8
+Date:                Fri, 20 Mar 2015   Prob (F-statistic):          4.42e-205
+Time:                        19:36:03   Log-Likelihood:                -1750.9
+No. Observations:                 449   AIC:                             3520.
+Df Residuals:                     440   BIC:                             3557.
+Df Model:                           8                                         
+Covariance Type:            nonrobust                                         
+=====================================================================================
+                        coef    std err          t      P>|t|      [95.0% Conf. Int.]
+-------------------------------------------------------------------------------------
+Intercept             0.4672      0.657      0.711      0.477        -0.823     1.758
+NumberOfTweets       -0.2280      0.131     -1.740      0.083        -0.486     0.030
+URLRatio              3.4591      2.075      1.667      0.096        -0.619     7.538
+FriendCount       -3.249e-06   7.77e-05     -0.042      0.967        -0.000     0.000
+AuthorCount           1.5056      0.189      7.978      0.000         1.135     1.876
+MeanOfRetweets       -0.7506      1.489     -0.504      0.615        -3.678     2.176
+NumberOfRetweets      0.1568      0.482      0.325      0.745        -0.791     1.105
+NumberOfFollowers  2.188e-05   1.11e-05      1.970      0.049      5.04e-08  4.37e-05
+MaxFollowers      -3.755e-05   1.29e-05     -2.913      0.004     -6.29e-05 -1.22e-05
+==============================================================================
+Omnibus:                      376.953   Durbin-Watson:                   2.123
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):            35149.113
+Skew:                           2.952   Prob(JB):                         0.00
+Kurtosis:                      45.941   Cond. No.                     1.23e+06
+==============================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 1.23e+06. This might indicate that there are
+strong multicollinearity or other numerical problems.
+Feature extraction done forsb49.........
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:         NumberOfTweets   R-squared:                       0.542
+Model:                            OLS   Adj. R-squared:                  0.537
+Method:                 Least Squares   F-statistic:                     112.7
+Date:                Fri, 20 Mar 2015   Prob (F-statistic):          1.22e-108
+Time:                        19:36:04   Log-Likelihood:                -2782.2
+No. Observations:                 675   AIC:                             5580.
+Df Residuals:                     667   BIC:                             5617.
+Df Model:                           7                                         
+Covariance Type:            nonrobust                                         
+=====================================================================================
+                        coef    std err          t      P>|t|      [95.0% Conf. Int.]
+-------------------------------------------------------------------------------------
+Intercept             1.0781      0.672      1.605      0.109        -0.241     2.397
+NumberOfTweets        0.5613      0.082      6.854      0.000         0.401     0.722
+URLRatio             -1.2797      3.144     -0.407      0.684        -7.454     4.895
+FriendCount           0.0033      0.001      3.329      0.001         0.001     0.005
+AuthorCount           0.2457      0.108      2.269      0.024         0.033     0.458
+MeanOfRetweets    -1.319e-15   3.23e-15     -0.408      0.684     -7.67e-15  5.03e-15
+NumberOfRetweets     -1.0547      0.430     -2.450      0.015        -1.900    -0.209
+NumberOfFollowers  3.122e-06   1.39e-06      2.243      0.025      3.89e-07  5.85e-06
+MaxFollowers      -2.374e-06   2.14e-06     -1.108      0.268     -6.58e-06  1.83e-06
+==============================================================================
+Omnibus:                     1052.269   Durbin-Watson:                   2.140
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):           505472.675
+Skew:                           8.856   Prob(JB):                         0.00
+Kurtosis:                     135.886   Cond. No.                     8.50e+21
+==============================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The smallest eigenvalue is 9.52e-30. This might indicate that there are
+strong multicollinearity problems or that the design matrix is singular.
