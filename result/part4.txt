@@ -1,0 +1,21 @@
+*****************************
+gohawks avg error = 141.4164
+nfl avg error = 159.246266648
+superbowl avg error = 248.205333308
+gopatriots avg error = 14.0022666667
+patriots avg error = 179.051733331
+sb49 avg error = 55.4194666655
+*****************************
+gohawks avg error = 5050.982657
+nfl avg error = 3340.10867605
+superbowl avg error = 76998.2330388
+gopatriots avg error = 1134.2010066
+patriots avg error = 23058.7821578
+sb49 avg error = 59454.0468223
+*****************************
+gohawks avg error = 322.196666667
+nfl avg error = 437.637524161
+superbowl avg error = 2336.87717621
+gopatriots avg error = 48.8696252466
+patriots avg error = 839.635396551
+sb49 avg error = 1432.78510643
