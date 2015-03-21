@@ -65,3 +65,71 @@ class Time(Feature): # returns hour value of tweet's post date
 		self.hour = temp.tm_hour
 	def get(self):
 		return self.hour
+	
+class URLRatio(Feature):
+	def __init__(self):
+		self.urlRatio = 0
+		self.tweetCount = 0
+	
+	def compute(self,tweet):		
+		urls = tweet['tweet']['entities']['urls']
+		numberOfURLsInTweet = len(urls)
+		self.urlRatio += numberOfURLsInTweet
+		self.tweetCount += 1
+		return self.urlRatio
+	
+	def get(self):
+		if self.tweetCount == 0:
+			return 0
+		return self.urlRatio*1.0/self.tweetCount
+
+class FriendCount(Feature):#Average Friend Count for Each Unique User
+	def __init__ (self):
+		self.friendCount = 0
+		self.authorCount = 0
+		self.authorDict = {}
+		
+	def compute(self,tweet):
+		authorID = tweet['tweet']['user']['id']
+		if(not self.authorDict.has_key(authorID)):			
+			self.authorDict[authorID] = 1
+			self.authorCount += 1
+			self.friendCount += tweet['tweet']['user']['friends_count']
+		
+	def get(self):
+		if self.authorCount == 0:
+			return 0
+		return self.friendCount/self.authorCount
+	
+class AuthorCount(Feature):
+	def __init__ (self):
+		self.authorCount = 0
+		self.authorDict = {}
+		
+	def compute(self,tweet):
+		authorID = tweet['tweet']['user']['id']
+		if(not self.authorDict.has_key(authorID)):			
+			self.authorDict[authorID] = 1
+			self.authorCount += 1
+		
+	def get(self):		
+		return self.authorCount
+	
+class MeanOfRetweets(Feature):
+	def __init__(self):
+		self.mean = 0
+		self.retweetCount = 0
+		self.tweetCount = 0
+		
+	def compute(self,tweet):
+		self.retweetCount += tweet['metrics']['citations']['data'][0]['citations']
+		self.tweetCount += 1 
+		return self.retweetCount
+	
+	def get(self):
+		if self.tweetCount == 0:
+			return 0
+		return self.retweetCount/self.tweetCount
+	
+	
+		

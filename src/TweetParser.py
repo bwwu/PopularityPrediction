@@ -56,6 +56,11 @@ class TweetParser:
 	def getRetweetCount(self):
 		return self.tweet['metrics']['citations']['data'][0]['citations']
 	
+	def getNumberOfURLs(self):
+		urls = self.tweet['tweet']['entities']['urls']
+		numberOfURLsInTweet = len(urls)	
+		return numberOfURLsInTweet
+	
 	def getHour(self):
 		tm = self.getTime()
 		tt = time.localtime(tm)

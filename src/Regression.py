@@ -13,11 +13,16 @@ features = [
 	'MaxFollowers',
 	'Time']
 
+features = [
+    'URLRatio',
+    'AuthorCount',
+    'NumberOfRetweets']
+
 predictant = ['NumberOfTweets']
 response = 'NumberOfTweets'
 
 class ModelBuilder:
-	def __init__(self, features, response):
+	def __init__(self, featureArguments, response):
 
 		self.features = features	# Arr of Features to bld model
 		self.resp = response			# Response var (predictant)
@@ -32,10 +37,10 @@ class ModelBuilder:
 		
 	def model(self):
 		#TODO: replace response with member var
-		formula =  response +'~' + '+'.join(self.resp)
+		formula =  response +'~' + '+'.join(self.features)
 		y,X = dmatrices(formula, data=self.df, return_type="dataframe")
 		y = y.shift(-1)
-		return smf.OLS(y[0:-1],X[0:-1])
+		return smf.OLS(y[0:-1],X[0:-1]),X
 		
 
 	# Make training and testing set based off array of indices

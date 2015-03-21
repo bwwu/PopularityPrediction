@@ -12,6 +12,14 @@ startTime = 1419804000
 features = [ 'Index', 'NumberOfTweets', 'NumberOfRetweets', 
 				'NumberOfFollowers', 'MaxFollowers',
 				'Time']
+
+features = [
+	'Index',
+	'NumberOfTweets',
+    'URLRatio',
+    'AuthorCount',
+    'NumberOfRetweets']
+
 class TweetStats:
 	def __init__(self,hashtag):
 		# hash tag
@@ -74,9 +82,11 @@ class TweetStats:
 		hour = (self.count + time.localtime(startTime).tm_hour) % 24
 		self.vector = [Feature.NumberOfTweets(),Feature.NumberOfRetweets(),
 		Feature.NumberOfFollowers(),Feature.MaxFollowers(),Feature.Time(hour)]
+		
+		self.vector = [Feature.NumberOfTweets(),Feature.URLRatio(), Feature.AuthorCount(), Feature.NumberOfRetweets()]
 
 	def genFeatures(self):
-		output = 'pt2_' + self.hashtag + '.csv'
+		output = 'pt3_' + self.hashtag + '.csv'
 		outfile = open(outpath + output, 'w')
 
 		outfile.write(','.join(features)+'\n') #csv headers
