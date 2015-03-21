@@ -7,11 +7,12 @@ from patsy import dmatrices
 datapath = '../result/'
 
 features = [
-	'NumberOfTweets',
-	'NumberOfRetweets',
-	'NumberOfFollowers', 
+	'Time',
 	'MaxFollowers',
-	'Time']
+	'NumberOfFollowers', 
+	'NumberOfRetweets',
+	'NumberOfTweets'
+]
 
 predictant = ['NumberOfTweets']
 response = 'NumberOfTweets'
@@ -62,16 +63,18 @@ class ModelBuilder:
 	def prune(self, t_init, t_final):
 		t_start = TweetStats.startTime
 		idx_init = 0 if t_init is 0 else (t_init - t_start)/3600
-		idx_final = len(df) if t_final is 0 else (t_final - t_start)/3600
+		idx_final = len(self.df) if t_final is 0 else (t_final - t_start)/3600
 		
 		df = self.df.shift(-idx_init)
 		self.df = df[0:idx_final-idx_init]
 
 	#
 	def crossvalidation(self):
-		print 'Cross validation....'
-		formula =  response +'~' + '+'.join(self.resp)
-		y,X = dmatrices(formula, data=self.df, return_type="dataframe")
+	#	print 'Cross validation....'
+		formula =  response +'~' + '+'.join(features)
+		#print '*****************'
+		#print formula
+		y,X = dmatrices(formula, data=self.train_s, return_type="dataframe")
 		mod = smf.OLS(y,X)
 		res = mod.fit()
 
@@ -80,13 +83,23 @@ class ModelBuilder:
 
 		#TODO: replace response with member data
 		for i in range(len(df)-1):		# For each data point in testing set
-			exog = df.loc[i].to_dict()	# Vector of features
-			ypred = res.predict(exog)	# Prediction
+			dexog = df.loc[i].to_dict()	# Vector of features
+
+			texog = df.loc[i].tolist()	# Vector of features
+			#texog['Intercept'] = 1
+			texog.insert(0,1)
+			#print X[:-5]
+
+			#print texog
+			#print dexog
+
+			ypred = res.predict(exog=texog)	# Prediction
 			ypred = ypred[0]
 			yexp = df[response].loc[i+1]
 			resid += abs(ypred - yexp)	
 
 		avg_e =  resid*1.0/(len(df)-1)	# Avg prediction error
+		#print avg_e
 		return avg_e
 
 
