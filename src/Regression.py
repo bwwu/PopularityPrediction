@@ -63,7 +63,7 @@ class ModelBuilder:
 	def prune(self, t_init, t_final):
 		t_start = TweetStats.startTime
 		idx_init = 0 if t_init is 0 else (t_init - t_start)/3600
-		idx_final = len(df) if t_final is 0 else (t_final - t_start)/3600
+		idx_final = len(self.df) if t_final is 0 else (t_final - t_start)/3600
 		
 		df = self.df.shift(-idx_init)
 		self.df = df[0:idx_final-idx_init]
